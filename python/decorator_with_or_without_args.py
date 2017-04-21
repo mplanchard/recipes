@@ -52,7 +52,7 @@ class decorate:
 print('pre-decoration with args')
 
 
-@validate('a', 'b')
+@decorate('a', 'b')
 def func_with_dec_args(*args):
     print('func_with_dec_args args: {}'.format(args))
     return 'foo'
@@ -63,7 +63,7 @@ print('post-decoration with args')
 
 print('pre-decoration no args')
 
-@validate
+@decorate
 def func_with_no_dec_args(*args):
     print('func_with_no_dec_args args: {}'.format(args))
     return 'bar'
