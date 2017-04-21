@@ -5,16 +5,35 @@ e.g. ``@decorate()`` or ``@decorate('foo')``, or used as a raw
 decorator, e.g. ``@decorate``.
 """
 
+
 class decorate:
 
     def __init__(self, *args, **kwargs):
-        """"""
+        """__init__ is always called at decoration time
+        
+        If the decorator is called with parens, ``__init__()``
+        is called with the arguments passed to the decorator.
+        
+        If the decorator is raw, ``__init__()`` is called with
+        one argument, which is the decorated function.
+        """
         print('__init__({})'.format(locals()))
         self.args = args
         self.kwargs = kwargs
 
     def __call__(self, *args, **kwargs):
-        """"""
+        """__call__ is either called at decoration time or at runtime
+        
+        If the decorator is specified with parens, as a call,
+        ``__call__()`` is called upon decoration and should return
+        a wrapped function. In this case, only one argument is
+        passed to ``__call__()`, which is the decorated function.
+        
+        If the decorator is raw, with no parens, ``__call__()``
+        will be called when the funcion is called, and acts as the
+        function wrapper. In this case, the arguments to 
+        ``__call__()`` are the arguments passed to the function.
+        """
         print('__call__({})'.format(locals()))
 
         if callable(self.args[0]) and len(self.args) == 1 and not self.kwargs:
@@ -31,7 +50,14 @@ class decorate:
             func = args[0]
 
             def func_wrapper(*args, **kwargs):
-                """"""
+                """This wrapper will replace the decorated function
+                
+                As such, it should be sure to call the decorated
+                function.
+                
+                The arguments to this wrapper are the arguments
+                passed to the function.
+                """
                 print('func_wrapper({})'.format(locals()))
                 self._pre()
                 ret = func(*args, **kwargs)
