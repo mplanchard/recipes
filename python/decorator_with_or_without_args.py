@@ -16,6 +16,11 @@ class decorate:
         
         If the decorator is raw, ``__init__()`` is called with
         one argument, which is the decorated function.
+        
+        Note that because of this, you may only have ONE specified
+        positional argument, which is understood to either be
+        the decorated function or something else. Other arguments
+        must be kwargs.
         """
         print('__init__({})'.format(locals()))
         self.args = args
@@ -36,7 +41,7 @@ class decorate:
         """
         print('__call__({})'.format(locals()))
 
-        if callable(self.args[0]) and len(self.args) == 1 and not self.kwargs:
+        if len(self.args) == 1 and callable(self.args[0]) and not self.kwargs:
             print('__call__ acting as func wrapper')
             func = self.args[0]
             self._pre()
@@ -44,7 +49,7 @@ class decorate:
             self._post()
             return ret
 
-        elif callable(args[0]) and len(args) == 1 and not kwargs:
+        elif len(args) == 1 and callable(args[0]) and not kwargs:
             print('__call__ returning a wrapped func')
 
             func = args[0]
@@ -79,7 +84,7 @@ class decorate:
 print('pre-decoration with args')
 
 
-@decorate('a', 'b')
+@decorate()
 def func_with_dec_args(*args):
     print('func_with_dec_args({})'.format(args))
     return 'foo'
