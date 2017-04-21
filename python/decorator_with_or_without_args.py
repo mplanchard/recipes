@@ -9,12 +9,13 @@ class decorate:
 
     def __init__(self, *args, **kwargs):
         """"""
+        print('__init__({})'.format(locals()))
         self.args = args
         self.kwargs = kwargs
 
     def __call__(self, *args, **kwargs):
         """"""
-        print('in __call__()')
+        print('__call__({})'.format(locals()))
 
         if callable(self.args[0]) and len(self.args) == 1 and not self.kwargs:
             print('__call__ acting as func wrapper')
@@ -31,7 +32,7 @@ class decorate:
 
             def func_wrapper(*args, **kwargs):
                 """"""
-                print('func_wrapper()')
+                print('func_wrapper({})'.format(locals()))
                 self._pre()
                 ret = func(*args, **kwargs)
                 self._post()
@@ -54,7 +55,7 @@ print('pre-decoration with args')
 
 @decorate('a', 'b')
 def func_with_dec_args(*args):
-    print('func_with_dec_args args: {}'.format(args))
+    print('func_with_dec_args({})'.format(args))
     return 'foo'
 
 
@@ -65,7 +66,7 @@ print('pre-decoration no args')
 
 @decorate
 def func_with_no_dec_args(*args):
-    print('func_with_no_dec_args args: {}'.format(args))
+    print('func_with_no_dec_args({})'.format(args))
     return 'bar'
 
 
