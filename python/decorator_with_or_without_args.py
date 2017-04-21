@@ -3,6 +3,10 @@ The following illustrates the flow of execution for a flexible
 decorator that be called either be called, with/without arguments,
 e.g. ``@decorate()`` or ``@decorate('foo')``, or used as a raw
 decorator, e.g. ``@decorate``.
+
+Rather than ``callable()``, if you expect a callable object might
+be passed to your decorator, you can also use ``inspect.isfunction(arg)
+or inspect.ismethod(arg)``.
 """
 
 
