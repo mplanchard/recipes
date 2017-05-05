@@ -5,17 +5,13 @@
 
 .. include:: ../../README.rst
 
+.. include:: ../../CHANGELOG.rst
+
+
 API Docs
 ========
 
-Contents:
-
-.. toctree::
-   :maxdepth: 4
-   modules
-
-.. include:: ../../CHANGELOG.rst
-
+.. include:: modules.rst
 
 Indices and tables
 ==================
