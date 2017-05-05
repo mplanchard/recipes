@@ -9,6 +9,8 @@ be passed to your decorator, you can also use ``inspect.isfunction(arg)
 or inspect.ismethod(arg)``.
 """
 
+from inspect import isfunction, ismethod
+
 
 class decorate:
 
@@ -85,32 +87,56 @@ class decorate:
         print('_post function')
 
 
-print('pre-decoration with args')
+# print('pre-decoration with args')
+#
+#
+# @decorate()
+# def func_with_dec_args(*args):
+#     print('func_with_dec_args({})'.format(args))
+#     return 'foo'
+#
+#
+# print('post-decoration with args')
+#
+#
+# print('pre-decoration no args')
+#
+# @decorate
+# def func_with_no_dec_args(*args):
+#     print('func_with_no_dec_args({})'.format(args))
+#     return 'bar'
+#
+#
+# print('post-decoration no args')
+#
+#
+# ret = func_with_dec_args('a', 'b')
+# print(ret)
+#
+# ret = func_with_no_dec_args('c', 'd')
+# print(ret)
 
 
-@decorate()
-def func_with_dec_args(*args):
-    print('func_with_dec_args({})'.format(args))
-    return 'foo'
+class SomeClass:
+
+    @decorate()
+    def meth_with_dec_args(self, *args):
+        print('meth_with_dec_args({})'.format(args))
+        return 'args'
+
+    # @decorate
+    # def meth_with_no_dec_args(self, *args):
+    #     print('meth_with_no_dec_args({})'.format(args))
+    #     return 'no_args'
 
 
-print('post-decoration with args')
+print('pre-instantiation')
 
+c = SomeClass()
 
-print('pre-decoration no args')
+print('post-instantiation')
 
-@decorate
-def func_with_no_dec_args(*args):
-    print('func_with_no_dec_args({})'.format(args))
-    return 'bar'
+print(c.meth_with_dec_args('a', 'b'))
 
-
-print('post-decoration no args')
-
-
-ret = func_with_dec_args('a', 'b')
-print(ret)
-
-ret = func_with_no_dec_args('c', 'd')
-print(ret)
+# print(c.meth_with_no_dec_args('c', 'd'))
 
