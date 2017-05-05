@@ -7,10 +7,6 @@
 
 .. include:: ../../CHANGELOG.rst
 
-
-API Docs
-========
-
 .. include:: modules.rst
 
 Indices and tables
