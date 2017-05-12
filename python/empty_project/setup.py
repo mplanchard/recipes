@@ -50,7 +50,7 @@ __version__ = '0.0.0'
 
 cwd = dirname(realpath(__file__))
 
-with open(join(cwd, 'src/_version.py')) as version_file:
+with open(join(cwd, '{0}/_version.py'.format(NAME))) as version_file:
     for line in version_file:
         # This will populate the __version__ and __version_info__ variables
         if line.startswith('__'):
