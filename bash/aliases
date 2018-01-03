@@ -1,0 +1,18 @@
+# General purpose aliases
+
+alias mv='mv -i'
+alias cp='cp -i'
+alias rm='rm -i'
+alias ls='ls -G -p -F'
+alias ll='ls -lGpFh'
+
+# When Dropbox has over 300k files, its performance suffers significantly,
+# often spiking at over 100% and staying there for quite some time. This
+# alias requires the `cputhrottle` program to be installed, and limits
+# Dropbox's CPU consumption to 50%.
+alias dropbox-throttle='ps aux | grep "/Applications/Dropbox.app/Contents/MacOS/Dropbox" | grep -v "S+" | awk '\''{print $2 " " $8 " " $12}'\'' | awk '\''!length($3) || $3~/firstrunupdate/'\'' | awk '\''{print $1}'\'' | xargs -p -I {} sudo cputhrottle {} 50'
+
+
+# This alias will kill dead symlinks on a Mac, in the user's home folder
+alias cleanse-links='find -L ~ -type l -exec rm {} +'
+
